@@ -7,7 +7,7 @@ If you want to skid it then make sure to create db.sqlite3 and a .env file conta
 
 email
 appkey
-google oauth2 key
-google oauth2 secret
+googleoauth2:key
+googleoauth2:secret
 adminname
 hostip
