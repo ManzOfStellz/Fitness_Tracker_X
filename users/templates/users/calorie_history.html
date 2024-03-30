@@ -1,0 +1,41 @@
+<!-- This page shows the calorie intake and burnt history of the user across the last 30 days graphically -->
+{% extends "users/base.html" %}
+{% block title %}Calorie History{% endblock title%}
+<!-- Page content -->
+{% block content %}
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                    <div class="card-header justify-content-center">
+                    <h5 class="card-title">Calorie History (Past 30 days)</h5>
+                    </div>
+                    <div class="pt-5">
+                    <p class="lead">This page shows graphs for the calories you've consumed and burnt at the end of each day across the last month.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-6 graph-col">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Calorie intake graph -->
+                    <h5 class="card-title">Calorie Intake History</h5>
+                    <img src="data:image/png;base64,{{ intake_graph }}" alt="Calorie Intake Graph" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 graph-col">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Calorie burnt graph -->
+                    <h5 class="card-title">Calorie Burnt History</h5>
+                    <img src="data:image/png;base64,{{ burnt_graph }}" alt="Calorie Burnt Graph" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content%}

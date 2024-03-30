@@ -1,0 +1,16 @@
+<!-- This template is used to display a message to the user when they have logged out of the site. -->
+{% extends "users/base.html" %}
+{% block title %}Logged Out{% endblock title %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h3 class="display-4">You have been logged out.</h3>
+        <!-- Display a message to the user that they have been logged out -->
+        <lead>
+            Thanks for using Fitness Tracker X, you can contact us by emailing fitnesstrackerx@gmail.com, we welcome any feedback.
+        </lead>
+        <!-- Add a button to redirect the user to the login page -->
+        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+    </div>
+</div>
+
+{% endblock content %}

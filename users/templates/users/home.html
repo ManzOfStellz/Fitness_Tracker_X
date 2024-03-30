@@ -1,0 +1,43 @@
+<!-- This is the template for the home page -->
+{% extends "users/base.html" %} 
+{% block title %} Home Page {% endblock title%}
+{% block content %}
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome, {{ user.first_name.title|default:'Guest' }}</h1> <!-- If user is not logged in, display 'Guest' -->
+        <p class="lead">
+            This is the home page, where you can see the summary of your progress today
+        </p>
+        <hr class="my-4">
+        <div>
+            {% if user.is_authenticated %}  <!-- If user is logged in, display the following -->   
+
+            <!-- Display the total calories consumed and burnt -->
+            <p class="lead">Total Calories Consumed: {{ total_calories }}</p>
+            <p class="lead">Total Calories Burnt: {{ total_burnt }}</p>
+            <div class="pt-3 pb-2">
+            <!-- Display total calories remaining -->
+            <h5>Total Calories Remaining: {{ total_remaining_calories }}</h5>
+            </div>
+            <div class="pt-3 pb-2">
+            <p class = "lead">Feel free to add more data by navigating to the correct page using the navbar above</p>
+            </div>
+            {% else %}
+            <!-- If user is not logged in, display the following -->
+            <p class="lead">Head to the exercise or calories page to start logging your data!</p>
+            {% endif %}
+
+        </div>
+        <hr class="my-4">
+        <p class="lead">
+            <!-- If user is logged in, display the logout button, else display the login and register buttons -->
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">Logout</a>
+            {% else %}
+                <div class="text-center">
+                    <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">Sign in</a>
+                    <a class="btn btn-primary btn-lg" href="{% url 'users-register' %}" role="button">Create an account</a>
+                </div>
+            {% endif %}
+        </p>
+    </div>
+{% endblock content %}

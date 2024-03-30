@@ -1,0 +1,19 @@
+<!-- This template is used to display a message to the user when they have logged out of the site. -->
+{% extends "users/base.html" %}
+{% block title %}Data Request{% endblock title %}
+{% block content %}
+
+    <div class="card", align="center", width="18rem;">
+        <div class="card-body">
+        <!-- Display a message to the user that they have been logged out -->
+        <h5 class="card-title">Request Successful!</h5>
+        <p class="card-text">
+            Your request was successful
+        </p>
+        <!-- Add a button to redirect the user to the login page -->
+        <br><hr><a href="{% url 'login' %}" class="btn btn-primary">Sign in again</a>
+        </div>
+    </div>
+
+
+{% endblock content %}

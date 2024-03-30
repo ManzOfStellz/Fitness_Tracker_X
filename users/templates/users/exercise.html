@@ -1,0 +1,107 @@
+<!-- Template for the exercise page -->
+{% extends "users/base.html" %}
+{% block title %}Exercises{% endblock title %}
+{% block content %} 
+<!-- create card to display the content -->
+<div class="form-content my-3 p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-0 mb-3">
+                    <div class="card-header justify-content-center">
+                        <h4 class="font-weight-light my-1 text-center">Today's exercises</h4>
+                    </div>
+                    <!-- Display form errors -->
+                    {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <div id="form_errors">
+                            {% for key, value in form.errors.items %}
+                                <strong>{{ value }}</strong>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="font-weight-light my-1 text-center pb-2">
+                            <h5>You can see your exercises below.</h5>
+                        </div>
+                        <!-- Display the exercises logged by the user -->
+                        {% if logged_exercises %}
+                        <table class="table">
+                            <thead>
+                                <tr><!-- Table headers -->
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Duration (Minutes)</th>
+                                    <th scope="col">Calories Burnt</th>
+                                    <th scope="col"> </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in logged_exercises %}
+                                <tr>
+                                    <td>{{ entry.3 }}</td> <!-- Accessing fourth element of the tuple (type) -->
+                                    <td>{{ entry.1 }}</td> <!-- Accessing second element of the tuple (duration) -->
+                                    <td>{{ entry.2 }}</td> <!-- Accessing third element of the tuple (calories) -->
+                                    <td>
+                                        <!-- Form to delete an exercise entry -->
+                                        <form action="" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="entry_id" value="{{ entry.0 }}">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tr>
+                                <!-- Display the total calories burnt -->
+                                <td><strong>Total Calories Expended</strong></td>
+                                <td></td>
+                                <td><strong>{{ total_burnt }}</strong></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        {% else %}
+                        <!-- If no exercises are logged, display the following -->
+                        <div class="font-weight-light my-1 text-center pb-5 ">
+                            <p>No exercises logged so far!</p>
+                        </div>
+                        {% endif %}
+                        <div class="font-weight-light my-1 text-center pb-0 pt-0">
+                            <!-- Prompt the user to log exercises -->
+                            <p>Want to log some exercises? Fill out the fields below.</p>
+                        </div>  
+                        <form method="POST">
+                            {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <!-- Add a field for the type of exercise -->
+                                            <label class="small mb-1">Type</label>
+                                            {{ form.type }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 my-4 pt-2">
+                                        <div class="form-group">
+                                            <!-- Add a field for the duration of the exercise -->
+                                            <label class="small mb-1">Duration (Minutes)</label>
+                                            {{ form.duration }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add button to submit the form -->
+                                <div class="position-absolute top-50 start-50 translate-middle">
+                                <button type="submit" class="btn btn-success">Add</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
